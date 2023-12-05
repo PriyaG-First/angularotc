@@ -1,0 +1,61 @@
+ 
+.container-fluid {
+	max-width: 250px;
+	margin: 0 auto;
+	margin-top: 180px;
+	padding: 30px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+	text-align: center;
+}
+
+form {
+	margin-top: 20px;
+}
+
+input[type="text"], input[type="password"] {
+	width: 90%;
+	padding: 5px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+
+button {
+	width: 95%;
+	padding: 10px;
+	background-color: #4CAF50;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #45a049;
+}
+
+#b1 {
+	margin-bottom: 10px;
+}
+label {
+	font-weight: bold;
+}
+ .is-invalid{
+    border-color:red;
+} 
+.d-none{
+    display: none;
+}
+small{
+    color: red;
+}
+body {
+	background-color: #004d99;
+   font-family: Arial, sans-serif; 
+}  

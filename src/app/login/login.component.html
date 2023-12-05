@@ -1,0 +1,21 @@
+
+ <div class="container-fluid">
+	<h2>LOGIN</h2>
+	<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+		{{loginForm.value | json}}
+		<input type="text" formControlName="username" name="username" [class.is-invalid]="username!.invalid && username!.touched"
+			placeholder="username" /><br>
+			<div *ngIf="username!.invalid && username!.touched">
+		<small [class.d-none]="username!.valid || username!.untouched" *ngIf="username?.errors?.['required']">username is required</small>
+		<small class="text-danger" *ngIf="username?.errors?.['minlength']">username must greater than 3 or 3 letters</small>
+		<small class="text-danger" *ngIf="username?.errors?.['forbiddenName']">{{username?.errors?.['forbiddenName'].value}} username not allowed.</small> 
+	</div>
+		<input type="password" formControlName="password" name="password" [class.is-invalid]="password!.invalid && password!.touched"
+			placeholder="Password"><br>
+		<small [class.d-none]="password!.valid || password!.untouched">password is required</small>
+		<ng-container *ngIf="hasError">
+			<small>username and password incorrect</small>
+		</ng-container>
+		<button [disabled]="loginForm.invalid" type="submit">Submit</button>
+	</form>
+</div> 

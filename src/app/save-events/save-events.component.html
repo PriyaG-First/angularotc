@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <form [formGroup]="eventForm" (ngSubmit)="saveEvents()" enctype="multipart/form-data">
+      <h1 id="head">New Event</h1>
+    <div class="form-group">
+      <label>Event name</label><br>
+      <input type="text" formControlName="eventname" [class.is-invalid]="eventname!.invalid && eventname!.touched" class="form-control"/>
+      <small [class.d-none]="eventname!.valid || eventname!.untouched">Event name is required</small>
+    </div>
+    <div class="form-group">
+      <label>Event details</label><br>
+      <textarea formControlName="details" class="form-control"></textarea>
+    
+    </div>
+    <div class="form-group">
+      <label>Start date and Time</label>
+      <input type="datetime-local" formControlName="startdate" [class.is-invalid]="startdate!.invalid && startdate!.touched" class="form-control"/>
+      <small [class.d-none]="startdate!.valid || startdate!.untouched">date is required</small>
+    </div>
+    <div class="form-group">
+      <label>Duration</label>
+      <input type="text" formControlName="duration" [class.is-invalid]="duration!.invalid && duration!.touched" class="form-control" placeholder="in minutes"/>
+      <div *ngIf="duration!.invalid && duration!.touched">
+        <small [class.d-none]="duration!.valid || duration!.untouched" *ngIf="duration?.errors?.['pattern']">only numbers are allowed.</small>
+        <small [class.d-none]="duration!.valid || duration!.untouched" *ngIf="duration?.errors?.['required']">duration is required</small>
+      </div>
+      
+    </div>
+     <div class="form-group">
+      <label>Trainer</label>
+     
+      <select formControlName="trainer">
+        <option value=""></option>
+         <option *ngFor="let trainer of trainers" [value]="trainer">{{ trainer }}</option> 
+      </select>
+    </div> 
+    <div class="form-group">
+      <label>Domain</label>
+      <select formControlName="domain">
+        <option value="Java">Java</option>
+        <option value="javascript">javascript</option>
+        <option value="react js">react js</option>
+        <option value="node js">node js</option>
+      </select>
+      <div *ngIf="domain!.invalid && domain!.touched">
+      <small [class.d-none]="domain!.valid || domain!.untouched" *ngIf="domain?.errors?.['required']">domain is required</small>
+    </div>
+    </div>
+    <div class="form-group">
+      <label>Status</label>
+      <select formControlName="status">
+        <option value="scheduled">scheduled</option>
+        <option value="in progress">in progress</option>
+        <option value="cancelled">cancelled</option>
+      </select>
+      <div *ngIf="status!.invalid && status!.touched">
+        <small [class.d-none]="status!.valid || status!.untouched" *ngIf="status?.errors?.['required']">status is required</small>
+      </div>
+    </div>
+     <div class="form-group">
+      <label>Location</label>
+      <select formControlName="location">
+        <option value=""></option>
+        <option *ngFor="let location of locations" [value]="location">{{location}}</option>
+      </select>
+    </div> 
+     <div class="form-group" id="file" *ngIf="showFileInput">
+        choose a file to upload:<input type="file" *ngIf="showFileInput" accept=".pdf"  formControlName="multifilename" (change)="onSelectedFile($event)"/>
+        <div *ngIf="multifilename!.invalid && multifilename!.touched">
+          <small [class.d-none]="multifilename!.valid || duration!.untouched" *ngIf="multifilename?.errors?.['required']">please choose file</small>
+        </div>
+     </div>
+   <button [disabled]="eventForm.invalid" id="btn" type="submit">create</button>
+  </form>
+  </div>

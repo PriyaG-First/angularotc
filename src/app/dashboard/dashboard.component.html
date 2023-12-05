@@ -1,0 +1,100 @@
+<app-save-events *ngIf="showEventForm" [eventFromParent]="eventObj"></app-save-events>
+<div class="logo" id="logo">
+    <img
+        src="https://boomi.com/wp-content/uploads/changepond-partner-logo-300x188.jpg"
+        alt="Logo" class="img-fluid">
+</div>
+
+<span id="user"> <img class="small-icon"
+    src="https://static-00.iconduck.com/assets.00/user-icon-2048x2048-ihoxz4vq.png"
+    alt="Image description"> 
+</span>
+
+
+<div id="logout">
+    <div>
+        <form>
+            <input type="submit"  value="logout" />
+        </form>
+    </div>
+
+</div>
+
+
+
+<div>
+    <input type="text" id="role" value="${role}" />
+</div>
+<div id=addeventandsearch>
+    
+    <a> <input type="button" (click)="addEvent()" id="addevent"
+        value="Add Event" /></a>
+   
+    Search : <select id="searchBy" (change)="getSearchValue()" [(ngModel)]="selectedField">
+        <option value="id" id="event">By event Id</option>
+        <option value="eventname" id="event">By event name</option>
+        <option value="startdate" id="event">By date</option>
+        <option value="duration" id="event">By duration</option>
+        <option value="status" id="event">By status</option>
+    </select>
+</div>
+<div id=search1>
+    <input type="search" [(ngModel)]="serachValue" id="myInput" (input)="clearText($event)" /> 
+    <input type="submit"  value="Search" (click)="filterFunction()" />
+</div>
+<div>
+<label>Events per page </label>
+<select [(ngModel)]="selectedValue" id="page" name="selectPage" (change)="getSelectedValue()">
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="15">15</option>
+    <option value="20">20</option>
+</select>
+</div>
+<div class="divTable" id="table">
+    <div class="headerRow">
+        <div class="divCell">
+            <b>Event Id</b>
+        </div>
+        <div class="divCell">
+            <b>Event name</b>
+        </div>
+        <div class="divCell">
+            <b>Start Date</b>
+        </div>
+
+        <div class="divCell">
+            <b>Duration</b>
+        </div>
+        <div class="divCell">
+            <b>Status</b>
+        </div>
+        <!-- <div class="divCell" id="updatehead">
+            <b>Update</b>
+        </div> -->
+        <!-- <div class="divCell"></div> -->
+        <div class="divCell">
+            <b>Attachment</b>
+        </div>
+    </div>
+    
+    
+        <div *ngFor="let event of events"> 
+            <div class="divRow">
+            <a href="#"><div class="divCell" id="eid"> {{event.id}}</div></a>  
+            <a href="#"><div class="divCell" id="eventname">{{event.eventname}}</div></a>
+	        <!-- <a href="#"><div class="divCell" id="details" style="display:none;"> {{event.details}}</div></a> -->
+	    <a href="#"><div class="divCell" id="date">{{event.startdate}}</div></a>
+	   <!-- <a href="#"><div class="divCell" id="trainer"style="display:none;"></div></a>
+	   <a href="#"><div class="divCell" id="domain" style="display:none;"></div></a> -->
+	  <a href="#"><div class="divCell" id="duration"> {{event.duration}}</div></a>
+	   <a href="#"><div class="divCell" id="status"> {{event.status}}</div></a> 
+       <a (click)="updateEventForm(event.id)" id="edit"><mat-icon>edit</mat-icon></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       <a (click)="deleteEvent(event.id)" id="edit"><mat-icon>delete</mat-icon></a>
+       <button>view Attachment</button>
+        </div> 
+    </div>
+    <div id="paginationContainer" class="pagination-container"></div>
+    </div>
+     
+

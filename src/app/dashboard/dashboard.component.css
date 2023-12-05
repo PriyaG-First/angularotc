@@ -1,0 +1,255 @@
+
+#button :active {
+	background-color: #b71c1c;
+}
+
+#button {
+	margin: 0 auto;
+	margin-left: 90%;
+	cursor: pointer;
+}
+
+#button :hover {
+	background-color: olive;
+}
+mat-icon:hover{
+	background-color:#ccc;
+}
+mat-icon:active{
+	background-color:#999
+}
+mat-icon{
+	border-radius: 10px;
+}
+/*Userlanding page for event list */
+.divTable {
+	display: table;
+	position:fixed;
+	border: none;
+	display:inline-table;
+	border-radius: 10px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	border-spacing: 6px;
+	margin-left: 8%;
+	margin-top: 7%;
+	
+}
+.pagination-container {
+	/* Your styles for the pagination container go here */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 20px 0;
+  }
+  .pagination-container a {
+	padding: 5px 10px;
+	margin: 0 5px;
+	text-decoration: dotted;
+	color: #333;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+  }
+  .pagination-container a.active {
+	background-color: #007bff;
+	color: #fff;
+	border-color: #007bff;
+  }
+  #pagelink{
+	position: fixed;
+	margin-top: 30%;
+	
+}
+.divRow {
+	display:table-row-group;
+	display: table-row;
+}
+
+.divCell {
+	width: 160px;
+/* 	//display:flex; */
+
+	float: left;
+	padding:8px;
+	border-spacing: 3cm;
+	display:table-cell;
+	
+}
+
+/* .divTable .divRow:hover {
+	background-color: #1fe0e0;
+} */
+
+
+
+#addeventandsearch{
+	width: 30%;
+	margin: 0 auto;
+	position:fixed;
+	margin-top:3.5%;
+	margin-left:51%;
+	padding: 10px;
+	cursor: pointer;
+}
+.pagination-container {
+  /* Your styles for the pagination container go here */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+/* Example style for pagination links (page numbers, next/previous buttons, etc.) */
+.pagination-container a {
+  padding: 5px 10px;
+  margin: 0 5px;
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.pagination-container a.active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+#logout {
+	width: 30%;
+	margin: 0 auto;
+	margin-top:-5%;
+	margin-left: 68.5%;
+	/* float:left; */
+	/* padding: 10px; */
+	cursor: pointer;
+}
+#logo{
+	width: 30%;
+	margin: 0 auto;
+	margin-top:-5%;
+	margin-left:8%;
+	
+	/* float:left; */
+	/* padding: 10px; */
+	
+}
+#eventopt {
+	width: 30%;
+	
+	position:fixed;
+	margin-top:1%;
+	margin-left:7.5%;
+	padding: 10px;
+	cursor: pointer;
+}
+#overlay {
+		display: none;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		background: #999;
+		width: 100%;
+		height: 100%;
+		opacity: 0.8;
+		z-index: 100;
+	}
+
+	#popup {
+		display: none;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		background: #fff;
+		width: 500px;
+		height: 500px;
+		margin-left: -250px; /*Half the value of width to center div*/
+		margin-top: -250px; /*Half the value of height to center div*/
+		z-index: 200;
+		overflow: scroll;
+		border-radius: 4%;
+		background-image:url("https://img.freepik.com/free-photo/elegant-white-background-with-blue-wave-lines_1017-32741.jpg?w=996&t=st=1689841307~exp=1689841907~hmac=5af6708dc64c10d6d471823b0a7cf6a20ea30137f1e0426f31dd5f8d46791c5b");
+
+		
+	}
+
+	#popupclose {
+		
+		padding: 10px;
+		cursor: pointer;
+		position: fixed;
+		margin-left: 29%;
+	}
+
+	.popupcontent {
+		padding: 10px;
+	}
+
+
+#selectanddeselect{
+	width: 30%;
+	
+	position:fixed;
+	margin-top:3%;
+	margin-left:7%;
+	padding: 10px;
+	cursor: pointer;
+}
+#delete{
+	
+	
+	margin-left:75%;
+	
+	cursor: pointer;
+	position:relative;
+}
+#search1{
+	
+	margin-top: 4.32%;
+	margin-left:71%;
+	position:fixed;
+}
+#role{
+	display:none;
+}
+/* #user{
+	position:fixed;
+	margin-top:-8%;
+	margin-left:88%;
+	 border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+  Assuming you have a class named 'small-icon' for the image
+  .small-icon {
+    width: 24px; Adjust the width to your desired size
+    height: 24px; Adjust the height to your desired size
+    display: inline-block; To align the image horizontally with text
+    You can add additional styles like margin, padding, etc. as needed
+  } */
+#user {
+  display: flex;
+  color: #333;
+  align-items: center;
+position:fixed;
+	margin-top:-8%;
+	margin-left:88%;
+}
+
+.small-icon {
+  width: 24px; /* Set the desired width for the small icon */
+  height: 24px; /* Set the desired height for the small icon */
+  margin-right: 8px; /* Adjust the margin as needed to separate the icon from the text */
+}
+.responsive-object {
+  position: absolute;
+  display:inline-block;
+  
+  width: 85%;
+  height: 90%;
+  border: none;
+}
+
+#pagelink{
+	position: fixed;
+	margin-top: 30%;
+	
+}

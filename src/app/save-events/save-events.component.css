@@ -1,0 +1,39 @@
+body {
+	background-image:
+		url("https://img.freepik.com/free-photo/elegant-white-background-with-blue-wave-lines_1017-32741.jpg?w=996&t=st=1689841307~exp=1689841907~hmac=5af6708dc64c10d6d471823b0a7cf6a20ea30137f1e0426f31dd5f8d46791c5b");
+	background-size: cover;
+	font-family: 'Times New Roman', Times, serif, sans-serif;
+}
+h1 {
+	text-align: center;
+	color: #333;
+}
+label {
+	font-weight: bold;
+}
+ .is-invalid{
+    border-color:red;
+} 
+.d-none{
+    display: none;
+}
+small{
+    color: red;
+}
+button{
+	width: 102%;
+	padding: 10px;
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+}
+form { 
+	max-width: 50%;
+	margin: 0 auto;
+	padding: 50px;
+	display: grid; 
+	gap: 10px; 
+	
+}
