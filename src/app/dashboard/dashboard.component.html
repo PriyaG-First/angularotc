@@ -1,4 +1,4 @@
-<app-save-events *ngIf="showEventForm" [eventFromParent]="eventObj"></app-save-events>
+<app-add-events *ngIf="showEventForm" [eventFromParent]="eventObj"></app-add-events>
 <div class="logo" id="logo">
     <img
         src="https://boomi.com/wp-content/uploads/changepond-partner-logo-300x188.jpg"
@@ -89,8 +89,10 @@
 	   <a href="#"><div class="divCell" id="domain" style="display:none;"></div></a> -->
 	  <a href="#"><div class="divCell" id="duration"> {{event.duration}}</div></a>
 	   <a href="#"><div class="divCell" id="status"> {{event.status}}</div></a> 
-       <a (click)="updateEventForm(event.id)" id="edit"><mat-icon>edit</mat-icon></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       <a (click)="deleteEvent(event.id)" id="edit"><mat-icon>delete</mat-icon></a>
+       <!-- <a (click)="updateEventForm(event.id)" id="edit"><mat-icon>edit</mat-icon></a> -->
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       <!-- <a (click)="deleteEvent(event.id)" id="edit"><mat-icon>delete</mat-icon></a> -->
+       <button>delete</button>
        <button>view Attachment</button>
         </div> 
     </div>

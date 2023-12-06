@@ -7,11 +7,11 @@ import { UpdateEventService } from '../service/update-event.service';
 import { FileServiceService } from '../service/file-service.service';
 
 @Component({
-  selector: 'app-save-events',
-  templateUrl: './save-events.component.html',
-  styleUrls: ['./save-events.component.css']
+  selector: 'app-add-events',
+  templateUrl: 'addevents.component.html',
+  styleUrls: ['addevents.component.css']
 })
-export class SaveEventsComponent {
+export class AddEventsComponent {
   public eventForm!: FormGroup;
   public trainers!: string[];
   public locations!: string[];

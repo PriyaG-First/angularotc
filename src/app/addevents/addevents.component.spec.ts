@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SaveEventsComponent } from './save-events.component';
+import { SaveEventsComponent } from './addevents.component';
 
 describe('SaveEventsComponent', () => {
   let component: SaveEventsComponent;
