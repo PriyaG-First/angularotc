@@ -6,6 +6,8 @@ import { UserIdleService } from '../user-idle.service';
 import { JwtResponseModel } from '../jwt-response-model';
 import { AuthService } from '../service/auth.service';
 import { validateUsername } from '../shared/username.validator';
+import { AppCookieService } from '../service/app-cookie.service';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +21,7 @@ export class LoginComponent {
     public jwtResponseModel!:JwtResponseModel;
    @Output() emitAuthentication =new EventEmitter();
    constructor(private formBuilder:FormBuilder,private loginService:LoginService,private router:Router,private idleservice:UserIdleService
-    ,private authService:AuthService){
+    ,private authService:AuthService,private appCookie:AppCookieService,private cookieSeervice:CookieService){
       
     }
    ngOnInit(){
@@ -42,6 +44,8 @@ export class LoginComponent {
                      this.isAuthenticated = this.jwtResponseModel.authenticated;
                      if(this.isAuthenticated){
                      // this.authService.setToken(response);
+                     this.cookieSeervice.set("jwtToken",this.jwtResponseModel.token)
+                    // this.appCookie.set("JWTToken",this.jwtResponseModel.token)
                         this.authService.setToken(this.jwtResponseModel.token);
                        // sessionStorage.setItem("JOTToken",this.authService.getToken())
                         this.toDashboard();

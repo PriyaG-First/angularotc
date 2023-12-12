@@ -2,9 +2,11 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { SaveEventsService } from '../service/save-events.service';
 import { Event } from '../event';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UpdateEventService } from '../service/update-event.service';
 import { FileServiceService } from '../service/file-service.service';
+import { AuthService } from '../service/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-add-events',
@@ -17,15 +19,18 @@ export class AddEventsComponent {
   public locations!: string[];
   public selectedFile!: FileList;
   public currentURL!: string;
-  public eventId!: number;
+  public eventId!: any;
   public eventObj!: Event;
-  public showFileInput!:boolean;
+  public showFileInput:boolean = true;
   @Input() public eventFromParent!: Event;
  
   @Input() public showEventComponent: boolean = false;
-  constructor(private formBuilder: FormBuilder, private eventService: SaveEventsService, private router: Router, private updateEventService: UpdateEventService,private fileService:FileServiceService) { }
-  ngOnInit() {
-this.fileService.showFileInput$.subscribe(show=>this.showFileInput = show);
+  constructor(private formBuilder: FormBuilder, private eventService: SaveEventsService, private router: Router, private updateEventService: UpdateEventService,private fileService:FileServiceService,
+    private activeRoute:ActivatedRoute) { }
+ ngOnInit() {
+  
+// this.fileService.showFileInput$.subscribe(show=>this.showFileInput = show);
+console.log("showfile ",this.showFileInput)
     this.eventService.getTrainers()//this method return observable object so we need to subscribe it.
       .subscribe({
         next: (response: string[]) => {
@@ -41,6 +46,7 @@ this.fileService.showFileInput$.subscribe(show=>this.showFileInput = show);
     });
 
     if (this.router.url.includes("/updateEvent")) {
+      this.showFileInput = false;
       let button = document.getElementById("btn");
      let head = document.getElementById("head")
      if(head){
@@ -50,9 +56,10 @@ this.fileService.showFileInput$.subscribe(show=>this.showFileInput = show);
         button.innerText = 'update';
       }
       this.currentURL = this.router.url;
-      this.eventId = parseInt(this.currentURL.substring(13, this.currentURL.length));
+      this.eventId= this.activeRoute.snapshot.paramMap.get("eventId");
+      //this.eventId = parseInt(this.currentURL.substring(13, this.currentURL.length));
       this.initializeEventForm()
-      this.updateEventForm(this.eventId);
+      this.updateEventForm(parseInt(this.eventId));
     }
     else {
       this.initializeEventForm();
@@ -101,7 +108,6 @@ this.fileService.showFileInput$.subscribe(show=>this.showFileInput = show);
    
   }
   updateEventForm(eventID: number) {
-    
     this.updateEventService.getEventById(eventID).subscribe({
       next: (response) => {
         this.eventObj = response;
@@ -146,7 +152,6 @@ this.fileService.showFileInput$.subscribe(show=>this.showFileInput = show);
         multifilename: ['', [Validators.required]]
       });
     }
-    
   }
   updateEvent(){
     this.eventForm.addControl("id",this.formBuilder.control(this.eventObj.id))

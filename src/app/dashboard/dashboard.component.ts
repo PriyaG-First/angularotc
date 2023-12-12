@@ -6,12 +6,14 @@ import { filter } from 'rxjs';
 import { GetAllEventsService } from '../service/get-all-events.service';
 import { AuthService } from '../service/auth.service';
 import { PageableModel } from '../pageable-model';
-import { Event as MycoustomEvent} from '../event';
-import { FileServiceService } from '../service/file-service.service';
+import { Event, Event as MycoustomEvent} from '../event';
 import { EventFilterService } from '../service/event-filter.service';
 import { DeleteEventService } from '../service/delete-event.service';
-import { ChangeDetectorRef } from '@angular/core';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { DeletemodalService } from '../shared/deletemodal.service';
+
+import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
+import { UpdateEventService } from '../service/update-event.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -20,6 +22,7 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class DashboardComponent {
   public pageableModel = new PageableModel([], 0, 0);
   events: MycoustomEvent[] = [];
+   event:string = "new event";
   public eventObj!: MycoustomEvent;
   public page!: number;
   currentPage!: number;
@@ -32,9 +35,11 @@ export class DashboardComponent {
   public showEventForm: boolean = false;
   public serachValue: any;
   constructor(private bodystyle: BodyStylingService, private router: Router, private location: Location, private getEventsService: GetAllEventsService,
-    private authService: AuthService, private fileService: FileServiceService, private render: Renderer2, private filterService: EventFilterService
-    ,private deleteService:DeleteEventService,private changeDetector:ChangeDetectorRef) { }
+    private authService: AuthService, private render: Renderer2, private filterService: EventFilterService
+    ,private deleteService:DeleteEventService,private deleteModalService:DeletemodalService,private getByIdService:UpdateEventService) { }
   ngOnInit() {
+    
+    console.log("cookei",document.cookie)
     this.bodystyle.removeStyleFromBody("background-color")
     document.body.style.backgroundImage = 'url(https://img.freepik.com/free-photo/elegant-white-background-with-blue-wave-lines_1017-32741.jpg?w=996&t=st=1689841307~exp=1689841907~hmac=5af6708dc64c10d6d471823b0a7cf6a20ea30137f1e0426f31dd5f8d46791c5b)';
     document.body.style.backgroundSize = 'cover';
@@ -63,11 +68,11 @@ export class DashboardComponent {
     });
   }
   addEvent() {
-    this.fileService.setShowFileInput(true)
+    //this.fileService.setShowFileInput(true)
     this.router.navigate(['createEvent']);
   }
   updateEventForm(eventID: number) {
-    this.fileService.setShowFileInput(false)
+    //this.fileService.setShowFileInput(false)
     this.router.navigate(['updateEvent', eventID]);
   }
   getSelectedValue() {
@@ -101,7 +106,7 @@ export class DashboardComponent {
     }
     
   }
-  clearText(event:Event){
+  clearText(){
     //const inputElement = event.target as HTMLElement;
    if(this.serachValue ===''){
     this.showEvents()
@@ -162,15 +167,22 @@ export class DashboardComponent {
     this.showEvents()
   }
   deleteEvent(eventId:number){
-    let isDelete = confirm("Are you want to delete?")
-    if(isDelete){
-      this.deleteService.deleteEvent(eventId,this.authService.getToken()).subscribe(()=>{
-        console.log("delete successfully")
-        //this.changeDetector.detectChanges()
-        this.showEvents()
-      });
-    }
+    this.deleteModalService.openDeleteConfirmationModal(DeleteModalComponent).result.then(
+      (result) => {
+        console.log("result ",result)
+        this.deleteService.deleteEvent(eventId,this.authService.getToken()).subscribe(()=>{
+              console.log("delete successfully")
+              this.showEvents()
+      })
+      },
+      (reason) => {
+        console.log("reason ",reason)
+      }
+    );
     
+  }
+  logout(){
+    this.router.navigate(["login"])
   }
 }
 

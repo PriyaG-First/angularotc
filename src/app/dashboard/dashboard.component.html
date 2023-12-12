@@ -14,7 +14,7 @@
 <div id="logout">
     <div>
         <form>
-            <input type="submit"  value="logout" />
+            <input type="submit"  value="logout" (click)="logout()"/>
         </form>
     </div>
 
@@ -26,9 +26,11 @@
     <input type="text" id="role" value="${role}" />
 </div>
 <div id=addeventandsearch>
-    
-    <a> <input type="button" (click)="addEvent()" id="addevent"
-        value="Add Event" /></a>
+    <button class="btn btn-success" (click)="addEvent()">
+        <i class='fas fa-plus-circle'></i><span> ADD</span>
+      </button>
+    <!-- <a> <input type="button" (click)="addEvent()" id="addevent"
+        value="Add Event" /></a> -->
    
     Search : <select id="searchBy" (change)="getSearchValue()" [(ngModel)]="selectedField">
         <option value="id" id="event">By event Id</option>
@@ -39,7 +41,7 @@
     </select>
 </div>
 <div id=search1>
-    <input type="search" [(ngModel)]="serachValue" id="myInput" (input)="clearText($event)" /> 
+    <input type="search" [(ngModel)]="serachValue" id="myInput" (input)="clearText()" /> 
     <input type="submit"  value="Search" (click)="filterFunction()" />
 </div>
 <div>
@@ -89,11 +91,10 @@
 	   <a href="#"><div class="divCell" id="domain" style="display:none;"></div></a> -->
 	  <a href="#"><div class="divCell" id="duration"> {{event.duration}}</div></a>
 	   <a href="#"><div class="divCell" id="status"> {{event.status}}</div></a> 
-       <!-- <a (click)="updateEventForm(event.id)" id="edit"><mat-icon>edit</mat-icon></a> -->
        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       <!-- <a (click)="deleteEvent(event.id)" id="edit"><mat-icon>delete</mat-icon></a> -->
-       <button>delete</button>
-       <button>view Attachment</button>
+       <button type="button" (click)="deleteEvent(event.id)" class="btn"><i class='fas fa-trash-alt delete'></i></button>
+       <a href="#" [routerLink]="['/updateEvent/', event.id]" class="btn"><i class="fa fa-edit edit"></i></a>
+       <a href="#" [routerLink]="['/viewEvent/', event.id]" class="btn"><i class='fas fa-eye view'></i></a>
         </div> 
     </div>
     <div id="paginationContainer" class="pagination-container"></div>

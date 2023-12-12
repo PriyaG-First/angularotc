@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
 import { Event } from '../event';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SaveEventsService {
 
-  constructor(private http:HttpClient,private authService:AuthService) { }
+  constructor(private http:HttpClient,private authService:AuthService,private cookie:CookieService) { }
   saveEvent(events:Event,file:File|null){
     const headers = new HttpHeaders().set("Authorization","Bearer "+this.authService.getToken())
     const formData = new FormData();
@@ -19,10 +20,14 @@ export class SaveEventsService {
    return this.http.post<string>("http://localhost:9001/new/events",formData,{headers}).pipe(catchError(this.errorHandler));
   }
   getTrainers(){
-    return this.http.get<string[]>("http://localhost:8081/getTrainers");
+    const headers = new HttpHeaders().set("Authorization","Bearer "+this.cookie.get("jwtToken"))
+    //const headers = new HttpHeaders().set("Authorization","Bearer "+this.authService.getToken())
+    return this.http.get<string[]>("http://localhost:9005/getTrainers",{headers});
   }
   getLocation(){
-    return this.http.get<string[]>("http://localhost:8081/getLocation");
+    const headers = new HttpHeaders().set("Authorization","Bearer "+this.cookie.get("jwtToken"))
+    //const headers = new HttpHeaders().set("Authorization","Bearer "+this.authService.getToken())
+    return this.http.get<string[]>("http://localhost:9005/getLocation",{headers});
   }
   private errorHandler(error:HttpErrorResponse){
     if(error.status===0){
