@@ -12,10 +12,10 @@ import { DeleteEventService } from '../service/delete-event.service';
 
 import { ModalService } from '../service/modal.service';
 
-import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
-import { UpdateEventService } from '../service/update-event.service';
 import { FileServiceService } from '../service/file-service.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { DEFAULT_INTERRUPTSOURCES, Idle } from '@ng-idle/core';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -38,10 +38,20 @@ export class DashboardComponent {
   public serachValue: any;
   constructor(private bodystyle: BodyStylingService, private router: Router, private location: Location, private getEventsService: GetAllEventsService,
     private authService: AuthService, private render: Renderer2, private filterService: EventFilterService
-    ,private deleteService:DeleteEventService,private modalService:ModalService,private fileService:FileServiceService,private sanitizer:DomSanitizer) { }
+    ,private deleteService:DeleteEventService,private modalService:ModalService,private fileService:FileServiceService,private sanitizer:DomSanitizer,private idle:Idle,
+    private cookie:CookieService) { 
+     //if the use idle or inactive for 5 sec after 60sec it is time out unless the user come again active
+      idle.setIdle(5);
+      idle.setTimeout(60)
+      idle.setInterrupts(DEFAULT_INTERRUPTSOURCES)
+      idle.onTimeout.subscribe(()=>{
+        alert("time out")
+        this.router.navigate(['login'])})
+        idle.onIdleStart.subscribe(() => {
+          console.log('Idle started');
+        });
+    }
   ngOnInit() {
-    
-    console.log("cookei",document.cookie)
     this.bodystyle.removeStyleFromBody("background-color")
     document.body.style.backgroundImage = 'url(https://img.freepik.com/free-photo/elegant-white-background-with-blue-wave-lines_1017-32741.jpg?w=996&t=st=1689841307~exp=1689841907~hmac=5af6708dc64c10d6d471823b0a7cf6a20ea30137f1e0426f31dd5f8d46791c5b)';
     document.body.style.backgroundSize = 'cover';
@@ -70,11 +80,9 @@ export class DashboardComponent {
     });
   }
   addEvent() {
-    //this.fileService.setShowFileInput(true)
     this.router.navigate(['createEvent']);
   }
   updateEventForm(eventID: number) {
-    //this.fileService.setShowFileInput(false)
     this.router.navigate(['updateEvent', eventID]);
   }
   getSelectedValue() {
@@ -184,31 +192,19 @@ export class DashboardComponent {
     
   }
   logout(){
+    // this.cookie.deleteAll();
+    localStorage.clear()
+    this.authService.setToken("");
     this.router.navigate(["login"])
   }
   viewcontent(id:number){
     this.fileService.getFilecontent(id).subscribe((response:Blob)=>{
-      
       const url = URL.createObjectURL(response);
+      //we have to sanitize our url ny DOMSanitizer
       const trustedURL = this.sanitizer.bypassSecurityTrustResourceUrl(url);
       console.log(trustedURL)
       this.modalService.openFileContentModal(trustedURL);
-      // this.modalService.openFileContentModal(url).result.then(
-      //     (result) => {
-      //       console.log("result ",result)
-      //     },
-      //     (reason) => {
-      //       console.log("reason ",reason)
-      //     }
-      //   )
     })
-   
-  //   const objectTag = document.createElement('object');
-	// objectTag.setAttribute("data","file/download/content?eventId="+id);
-	// objectTag.innerText="Unable to open the PDF file.";
-	// objectTag.setAttribute("class","responsive-object");
-	// objectTag.setAttribute("type","application/pdf");
-  // 
    }
 }
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BodyStylingService } from './service/body-styling.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   public showDashbord!:boolean;
   public showlogin:boolean=true;
- // constructor(private bnIdle:BnNgIdleService){}
-  // ngOnInit(){
-  //   this.bnIdle.startWatching(180).subscribe((res)=>console.log("session time out",res));
-  // }
+  constructor(private bodyStyle:BodyStylingService){}
+   ngOnInit(){
+     this.bodyStyle.addStyleFromBody()
+   }
   onLoginProcess(event:boolean){
     console.log("event ",event)
     if(event){

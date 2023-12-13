@@ -13,7 +13,8 @@ export class GetAllEventsService {
 
   getAllEvents(pageObj:any,token:string){
     // console.log(pageObj['size'])
-    const headers = new HttpHeaders().set("Authorization","Bearer "+this.cookie.get("jwtToken"));
+    const headers = new HttpHeaders().set("Authorization","Bearer "+localStorage.getItem("jwtToken"));
+   // const headers = new HttpHeaders().set("Authorization","Bearer "+this.cookie.get("jwtToken"));
     // const headers = new HttpHeaders().set("Authorization","Bearer "+token);
     return this.http.get<PageableModel>("http://localhost:9000/events/getAllEvents?size="+pageObj['size']+"&page="+pageObj['page'],{headers});
   }

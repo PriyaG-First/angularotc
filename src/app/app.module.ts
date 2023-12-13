@@ -12,6 +12,7 @@ import { BodyStylingService } from './service/body-styling.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgIdleModule } from '@ng-idle/core';
 
 
 @NgModule({
@@ -29,9 +30,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     BrowserAnimationsModule,
     NgbModule,
-    
+    NgIdleModule.forRoot()
   ],
-  providers: [Location,BodyStylingService,{provide:Renderer2,useExisting:RendererFactory2}],
+  providers: [Location,BodyStylingService,{provide:Renderer2,useExisting:RendererFactory2},NgIdleModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

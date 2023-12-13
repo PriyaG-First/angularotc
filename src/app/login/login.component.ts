@@ -20,8 +20,8 @@ export class LoginComponent {
    public isAuthenticated:boolean = false;
     public jwtResponseModel!:JwtResponseModel;
    @Output() emitAuthentication =new EventEmitter();
-   constructor(private formBuilder:FormBuilder,private loginService:LoginService,private router:Router,private idleservice:UserIdleService
-    ,private authService:AuthService,private appCookie:AppCookieService,private cookieSeervice:CookieService){
+   constructor(private formBuilder:FormBuilder,private loginService:LoginService,private router:Router
+    ,private authService:AuthService){
       
     }
    ngOnInit(){
@@ -44,7 +44,8 @@ export class LoginComponent {
                      this.isAuthenticated = this.jwtResponseModel.authenticated;
                      if(this.isAuthenticated){
                      // this.authService.setToken(response);
-                     this.cookieSeervice.set("jwtToken",this.jwtResponseModel.token)
+                     localStorage.setItem("jwtToken",this.jwtResponseModel.token)
+                    // this.cookieSeervice.set("jwtToken",this.jwtResponseModel.token)
                     // this.appCookie.set("JWTToken",this.jwtResponseModel.token)
                         this.authService.setToken(this.jwtResponseModel.token);
                        // sessionStorage.setItem("JOTToken",this.authService.getToken())
@@ -63,8 +64,5 @@ export class LoginComponent {
    }
  private toDashboard(){
   this.router.navigate(['/dashboard']);
-  //this.idleservice.restIdleTime();
-  // document.addEventListener('mousemove',this.idleservice.restIdleTime);
-  // document.addEventListener('keydown',this.idleservice.restIdleTime)
  }
 }
