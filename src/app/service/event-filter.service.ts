@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PageableModel } from '../pageable-model';
+import { PageableModel } from '../model/pageable-model';
 
 @Injectable({
   providedIn: 'root'

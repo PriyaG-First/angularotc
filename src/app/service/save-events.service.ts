@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
-import { Event } from '../event';
+import { Event } from '../model/event';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({

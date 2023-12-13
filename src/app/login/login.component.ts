@@ -3,7 +3,7 @@ import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { LoginService } from '../service/login.service';
 import { Router } from '@angular/router';
 import { UserIdleService } from '../user-idle.service';
-import { JwtResponseModel } from '../jwt-response-model';
+import { JwtResponseModel } from '../model/jwt-response-model';
 import { AuthService } from '../service/auth.service';
 import { validateUsername } from '../shared/username.validator';
 import { AppCookieService } from '../service/app-cookie.service';

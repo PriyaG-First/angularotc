@@ -68,7 +68,7 @@ mat-icon{
 	width: 160px;
 /* 	//display:flex; */
 
-	float: left;
+	float: center;
 	padding:8px;
 	border-spacing: 3cm;
 	display:table-cell;

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { SaveEventsService } from '../service/save-events.service';
-import { Event } from '../event';
+import { Event } from '../model/event';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UpdateEventService } from '../service/update-event.service';
 import { FileServiceService } from '../service/file-service.service';

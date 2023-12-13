@@ -1,37 +1,25 @@
 <app-add-events *ngIf="showEventForm" [eventFromParent]="eventObj"></app-add-events>
 <div class="logo" id="logo">
-    <img
-        src="https://boomi.com/wp-content/uploads/changepond-partner-logo-300x188.jpg"
-        alt="Logo" class="img-fluid">
+    <img src="https://boomi.com/wp-content/uploads/changepond-partner-logo-300x188.jpg" alt="Logo" class="img-fluid">
 </div>
-
-<span id="user"> <img class="small-icon"
-    src="https://static-00.iconduck.com/assets.00/user-icon-2048x2048-ihoxz4vq.png"
-    alt="Image description"> 
+<span id="user"> <img class="small-icon" src="https://static-00.iconduck.com/assets.00/user-icon-2048x2048-ihoxz4vq.png"
+        alt="Image description">
 </span>
-
-
 <div id="logout">
     <div>
         <form>
-            <input type="submit"  value="logout" (click)="logout()"/>
+            <input type="submit" value="logout" (click)="logout()" />
         </form>
     </div>
 
 </div>
-
-
-
 <div>
     <input type="text" id="role" value="${role}" />
 </div>
 <div id=addeventandsearch>
     <button class="btn btn-success" (click)="addEvent()">
         <i class='fas fa-plus-circle'></i><span> ADD</span>
-      </button>
-    <!-- <a> <input type="button" (click)="addEvent()" id="addevent"
-        value="Add Event" /></a> -->
-   
+    </button>
     Search : <select id="searchBy" (change)="getSearchValue()" [(ngModel)]="selectedField">
         <option value="id" id="event">By event Id</option>
         <option value="eventname" id="event">By event name</option>
@@ -41,17 +29,17 @@
     </select>
 </div>
 <div id=search1>
-    <input type="search" [(ngModel)]="serachValue" id="myInput" (input)="clearText()" /> 
-    <input type="submit"  value="Search" (click)="filterFunction()" />
+    <input type="search" [(ngModel)]="serachValue" id="myInput" (input)="clearText()" />
+    <input type="submit" value="Search" (click)="filterFunction()" />
 </div>
 <div>
-<label>Events per page </label>
-<select [(ngModel)]="selectedValue" id="page" name="selectPage" (change)="getSelectedValue()">
-    <option value="5">5</option>
-    <option value="10">10</option>
-    <option value="15">15</option>
-    <option value="20">20</option>
-</select>
+    <label>Events per page </label>
+    <select [(ngModel)]="selectedValue" id="page" name="selectPage" (change)="getSelectedValue()">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+    </select>
 </div>
 <div class="divTable" id="table">
     <div class="headerRow">
@@ -71,33 +59,22 @@
         <div class="divCell">
             <b>Status</b>
         </div>
-        <!-- <div class="divCell" id="updatehead">
-            <b>Update</b>
-        </div> -->
-        <!-- <div class="divCell"></div> -->
-        <div class="divCell">
-            <b>Attachment</b>
+    </div>
+    <div *ngFor="let event of events">
+        <div class="divRow">
+            <div class="divCell" id="eid"> {{event.id}}</div>
+            <div class="divCell" id="eventname">{{event.eventname}}</div>
+
+            <div class="divCell" id="date">{{event.startdate}}</div>
+
+            <div class="divCell" id="duration"> {{event.duration}}</div>
+            <div class="divCell" id="status"> {{event.status}}</div>
+            <button type="button" (click)="deleteEvent(event.id)" class="btn"><i
+                    class='fas fa-trash-alt delete'></i></button>
+            <a href="#" [routerLink]="['/updateEvent/', event.id]" class="btn"><i class="fa fa-edit edit"></i></a>
+            <a href="#" [routerLink]="['/viewEvent/', event.id]" class="btn"><i class='fas fa-eye view'></i></a> 
+             <button type="button" (click)="viewcontent(event.id)">view attachment</button>  
         </div>
     </div>
-    
-    
-        <div *ngFor="let event of events"> 
-            <div class="divRow">
-            <a href="#"><div class="divCell" id="eid"> {{event.id}}</div></a>  
-            <a href="#"><div class="divCell" id="eventname">{{event.eventname}}</div></a>
-	        <!-- <a href="#"><div class="divCell" id="details" style="display:none;"> {{event.details}}</div></a> -->
-	    <a href="#"><div class="divCell" id="date">{{event.startdate}}</div></a>
-	   <!-- <a href="#"><div class="divCell" id="trainer"style="display:none;"></div></a>
-	   <a href="#"><div class="divCell" id="domain" style="display:none;"></div></a> -->
-	  <a href="#"><div class="divCell" id="duration"> {{event.duration}}</div></a>
-	   <a href="#"><div class="divCell" id="status"> {{event.status}}</div></a> 
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       <button type="button" (click)="deleteEvent(event.id)" class="btn"><i class='fas fa-trash-alt delete'></i></button>
-       <a href="#" [routerLink]="['/updateEvent/', event.id]" class="btn"><i class="fa fa-edit edit"></i></a>
-       <a href="#" [routerLink]="['/viewEvent/', event.id]" class="btn"><i class='fas fa-eye view'></i></a>
-        </div> 
-    </div>
     <div id="paginationContainer" class="pagination-container"></div>
-    </div>
-     
-
+</div>

@@ -5,15 +5,17 @@ import { Location } from '@angular/common';
 import { filter } from 'rxjs';
 import { GetAllEventsService } from '../service/get-all-events.service';
 import { AuthService } from '../service/auth.service';
-import { PageableModel } from '../pageable-model';
-import { Event, Event as MycoustomEvent} from '../event';
+import { PageableModel } from '../model/pageable-model';
+import { Event, Event as MycoustomEvent} from '../model/event';
 import { EventFilterService } from '../service/event-filter.service';
 import { DeleteEventService } from '../service/delete-event.service';
 
-import { DeletemodalService } from '../shared/deletemodal.service';
+import { ModalService } from '../service/modal.service';
 
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 import { UpdateEventService } from '../service/update-event.service';
+import { FileServiceService } from '../service/file-service.service';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -36,7 +38,7 @@ export class DashboardComponent {
   public serachValue: any;
   constructor(private bodystyle: BodyStylingService, private router: Router, private location: Location, private getEventsService: GetAllEventsService,
     private authService: AuthService, private render: Renderer2, private filterService: EventFilterService
-    ,private deleteService:DeleteEventService,private deleteModalService:DeletemodalService,private getByIdService:UpdateEventService) { }
+    ,private deleteService:DeleteEventService,private modalService:ModalService,private fileService:FileServiceService,private sanitizer:DomSanitizer) { }
   ngOnInit() {
     
     console.log("cookei",document.cookie)
@@ -167,7 +169,7 @@ export class DashboardComponent {
     this.showEvents()
   }
   deleteEvent(eventId:number){
-    this.deleteModalService.openDeleteConfirmationModal(DeleteModalComponent).result.then(
+    this.modalService.openDeleteConfirmationModal().result.then(
       (result) => {
         console.log("result ",result)
         this.deleteService.deleteEvent(eventId,this.authService.getToken()).subscribe(()=>{
@@ -184,6 +186,30 @@ export class DashboardComponent {
   logout(){
     this.router.navigate(["login"])
   }
+  viewcontent(id:number){
+    this.fileService.getFilecontent(id).subscribe((response:Blob)=>{
+      
+      const url = URL.createObjectURL(response);
+      const trustedURL = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+      console.log(trustedURL)
+      this.modalService.openFileContentModal(trustedURL);
+      // this.modalService.openFileContentModal(url).result.then(
+      //     (result) => {
+      //       console.log("result ",result)
+      //     },
+      //     (reason) => {
+      //       console.log("reason ",reason)
+      //     }
+      //   )
+    })
+   
+  //   const objectTag = document.createElement('object');
+	// objectTag.setAttribute("data","file/download/content?eventId="+id);
+	// objectTag.innerText="Unable to open the PDF file.";
+	// objectTag.setAttribute("class","responsive-object");
+	// objectTag.setAttribute("type","application/pdf");
+  // 
+   }
 }
 
 

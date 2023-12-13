@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../user';
+import { User } from '../model/user';
 import { catchError, throwError } from 'rxjs';
-import { JwtResponseModel } from '../jwt-response-model';
+import { JwtResponseModel } from '../model/jwt-response-model';
 
 @Injectable({
   providedIn: 'root'

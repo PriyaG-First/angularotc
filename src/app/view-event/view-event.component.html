@@ -1,23 +1,15 @@
 
-<table class="table table-striped" >
-    <thead>
-    <tr>
-    <th scope="col">eventId</th>
-    <th scope="col">eventName</th>
-    <th  scope="col">eventDetails</th>
-    <th scope="col">startdate</th>
-    <th scope="col">duration</th>
-    <th scope="col">status</th>
-    <th scope="col">location</th>
-    </tr>
-    </thead>
-    <tr>
-        <td>{{event.id}}</td>
-        <td>{{event.eventname}}</td>
-        <td>{{event.details}}</td>
-        <td>{{event.startdate}}</td>
-        <td>{{event.duration}}</td>
-        <td>{{event.status}}</td>
-        <td>{{event.location}}</td>
-    </tr>
-</table>
+<div class="container mt-5" align="center">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Event Details</h5>
+        <p class="card-text"><strong>event id</strong>  {{event.id}}</p>
+        <p class="card-text"><strong>eventName</strong> {{event.eventname}}</p>
+        <p class="card-text"><strong>eventDetails</strong> {{event.details}}</p>
+        <p class="card-text"><strong>startdate</strong> {{event.startdate}}</p>
+        <p class="card-text"><strong>duration</strong> {{event.duration}}</p>
+        <p class="card-text"><strong>status</strong> {{event.status}}</p>
+        <p class="card-text"><strong>location</strong> {{event.location}}</p>
+      </div>
+    </div>
+  </div>

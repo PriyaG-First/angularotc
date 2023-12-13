@@ -1,13 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DeletemodalService } from './deletemodal.service';
+import { ModalService } from './modal.service';
 
-describe('DeletemodalService', () => {
-  let service: DeletemodalService;
+
+describe('ModalService', () => {
+  let service: ModalService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DeletemodalService);
+    service = TestBed.inject(ModalService);
   });
 
   it('should be created', () => {
