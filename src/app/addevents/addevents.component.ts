@@ -30,7 +30,6 @@ export class AddEventsComponent {
  ngOnInit() {
   
 // this.fileService.showFileInput$.subscribe(show=>this.showFileInput = show);
-console.log("showfile ",this.showFileInput)
     this.eventService.getTrainers()//this method return observable object so we need to subscribe it.
       .subscribe({
         next: (response: string[]) => {

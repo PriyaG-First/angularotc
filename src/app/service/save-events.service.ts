@@ -26,7 +26,8 @@ export class SaveEventsService {
     return this.http.get<string[]>("http://localhost:9005/getTrainers",{headers});
   }
   getLocation(){
-    const headers = new HttpHeaders().set("Authorization","Bearer "+this.cookie.get("jwtToken"))
+    // const headers = new HttpHeaders().set("Authorization","Bearer "+this.cookie.get("jwtToken"))
+    const headers = new HttpHeaders().set("Authorization","Bearer "+localStorage.getItem("jwtToken"))
     //const headers = new HttpHeaders().set("Authorization","Bearer "+this.authService.getToken())
     return this.http.get<string[]>("http://localhost:9005/getLocation",{headers});
   }

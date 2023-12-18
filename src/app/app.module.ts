@@ -1,4 +1,4 @@
-import { NgModule, Renderer2, RendererFactory2 } from '@angular/core';
+import { ChangeDetectorRef, NgModule, Renderer2, RendererFactory2 } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,8 +11,10 @@ import { AddEventsComponent } from './addevents/addevents.component';
 import { BodyStylingService } from './service/body-styling.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgIdleModule } from '@ng-idle/core';
+import { provideUserIdleConfig } from 'angular-user-idle';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -30,9 +32,11 @@ import { NgIdleModule } from '@ng-idle/core';
     FormsModule,
     BrowserAnimationsModule,
     NgbModule,
-    NgIdleModule.forRoot()
+    NgIdleModule.forRoot(),
+    ModalModule.forRoot()
+  
   ],
-  providers: [Location,BodyStylingService,{provide:Renderer2,useExisting:RendererFactory2},NgIdleModule],
+  providers: [Location,BodyStylingService,{provide:Renderer2,useExisting:RendererFactory2},NgIdleModule,provideUserIdleConfig({idle:60,timeout:60}),NgbActiveModal],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

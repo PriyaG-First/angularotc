@@ -4,14 +4,12 @@ import { Injector, inject } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
 export const authGuard: CanActivateFn = (route, state) => {
-   console.log(state.url)
 
   if(inject(AuthService).getToken()!=null || localStorage.getItem("jwtToken")!=null){
     return true;
   }
   else{
     inject(Router).navigate(['login'])
-    console.log("inside the authGurd token",inject(AuthService).getToken())
     return false;
   }
  
