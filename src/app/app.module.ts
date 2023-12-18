@@ -36,7 +36,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ModalModule.forRoot()
   
   ],
-  providers: [Location,BodyStylingService,{provide:Renderer2,useExisting:RendererFactory2},NgIdleModule,provideUserIdleConfig({idle:60,timeout:60}),NgbActiveModal],
+  providers: [Location,BodyStylingService,{provide:Renderer2,useExisting:RendererFactory2},NgIdleModule,provideUserIdleConfig({idle:6,timeout:6}),NgbActiveModal],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -47,14 +47,16 @@ export class DashboardComponent {
     , private deleteService: DeleteEventService, private modalService: ModalService, private fileService: FileServiceService, private sanitizer: DomSanitizer,
     private userIdleService: UserIdleService, public modal: NgbActiveModal, private bsmodal: BsModalService) {
      this.userIdleService.startWatching()
-  //   this.userIdleService.onTimerStart().subscribe((count) => {
-  //     this.idlestate = "you will be time out in " + count + " sec"
-  //     this.isOpen = true;
-  //    // this.childModal.show()
-  //     const bsmodalBackdrop = document.getElementsByTagName("bs-modal-backdrop");
-  //     console.log("bsmodalBackdrop ", bsmodalBackdrop)
-  //   })
+     console.log("start watching...")
+    this.userIdleService.onTimerStart().subscribe((count) => {
+      this.idlestate = "you will be time out in " + count + " sec"
+     // this.isOpen = true;
+     // this.childModal.show()
+      const bsmodalBackdrop = document.getElementsByTagName("bs-modal-backdrop");
+      console.log("bsmodalBackdrop ", bsmodalBackdrop)
+    })
      this.userIdleService.onTimeout().subscribe(() => {
+      alert("going to timeout")
        this.userIdleService.stopTimer()
        this.logout()
      })
